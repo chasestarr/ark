@@ -16,29 +16,29 @@ After you set up the Ark server, try these examples:
 
 1. Start the sample nginx app:
 
-    ```bash
-    kubectl apply -f examples/nginx-app/base.yaml
-    ```
+   ```bash
+   kubectl apply -f examples/nginx-app/base.yaml
+   ```
 
 1. Create a backup:
 
-    ```bash
-    ark backup create nginx-backup --include-namespaces nginx-example
-    ```
+   ```bash
+   ark backup create nginx-backup --include-namespaces nginx-example
+   ```
 
 1. Simulate a disaster:
 
-    ```bash
-    kubectl delete namespaces nginx-example
-    ```
+   ```bash
+   kubectl delete namespaces nginx-example
+   ```
 
-    Wait for the namespace to be deleted.
+   Wait for the namespace to be deleted.
 
 1. Restore your lost resources:
 
-    ```bash
-    ark restore create nginx-backup
-    ```
+   ```bash
+   ark restore create nginx-backup
+   ```
 
 ### Snapshot example (with PersistentVolumes)
 
@@ -46,32 +46,32 @@ After you set up the Ark server, try these examples:
 
 1. Start the sample nginx app:
 
-    ```bash
-    kubectl apply -f examples/nginx-app/with-pv.yaml
-    ```
+   ```bash
+   kubectl apply -f examples/nginx-app/with-pv.yaml
+   ```
 
 1. Create a backup with PV snapshotting:
 
-    ```bash
-    ark backup create nginx-backup --include-namespaces nginx-example
-    ```
+   ```bash
+   ark backup create nginx-backup --include-namespaces nginx-example
+   ```
 
 1. Simulate a disaster:
 
-    ```bash
-    kubectl delete namespaces nginx-example
-    ```
+   ```bash
+   kubectl delete namespaces nginx-example
+   ```
 
-    Because the default [reclaim policy][19] for dynamically-provisioned PVs is "Delete", these commands should trigger your cloud provider to delete the disk backing the PV. The deletion process is asynchronous so this may take some time. **Before continuing to the next step, check your cloud provider to confirm that the disk no longer exists.**
+   Because the default [reclaim policy][19] for dynamically-provisioned PVs is "Delete", these commands should trigger your cloud provider to delete the disk backing the PV. The deletion process is asynchronous so this may take some time. **Before continuing to the next step, check your cloud provider to confirm that the disk no longer exists.**
 
 1. Restore your lost resources:
 
-    ```bash
-    ark restore create nginx-backup
-    ```
+   ```bash
+   ark restore create nginx-backup
+   ```
 
-[0]: /aws-config.md
-[1]: /gcp-config.md
-[2]: /azure-config.md
-[3]: /namespace.md
+[0]: /docs/aws-config.md
+[1]: /docs/gcp-config.md
+[2]: /docs/azure-config.md
+[3]: /docs/namespace.md
 [19]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming
